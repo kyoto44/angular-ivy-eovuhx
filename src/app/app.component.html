@@ -10,15 +10,21 @@
   <div class="title">HACKATHON’20: ART OF TECHNOLOGY</div>
 
   <h4>Форма</h4>
-  <div class="form-wrapper">
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-  </div>
+  <form class="form-wrapper" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="formControl">
+      <input type="text" formControlName="name" />
+    </div>
+    <div class="formControl">
+      <input type="date" formControlName="date" />
+    </div>
+    <div class="formControl">
+      <input type="number" formControlName="count" />
+    </div>
+    <div class="fromControl">
+      <input type="checkbox" formControlName="fastDeliver" />
+    </div>
+    <button type="button">Undo</button>
+    <button type="button">Redo</button>
+    <button type="submit">Submit</button>
+  </form>
 </div>
