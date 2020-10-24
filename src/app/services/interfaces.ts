@@ -1,6 +1,6 @@
 export interface IFormState {
   name: string;
-  date: Date;
+  date: string;
   count: number;
   fastDeliver: boolean;
   notes: string[];

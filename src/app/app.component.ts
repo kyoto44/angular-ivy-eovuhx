@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormArray, FormGroup } from '@angular/forms';
 
 import { StateService } from './services/state.service';
 import { createFormControl } from './utils';
@@ -11,19 +11,22 @@ import { createFormControl } from './utils';
 })
 export class AppComponent implements OnInit {
   form: FormGroup;
+  notes: FormArray;
 
   constructor(public stateService: StateService) {}
 
   ngOnInit(): void {
-
-    console.log(this.stateService.state.date.toLocaleDateString());
+    console.log(this.stateService.state.date);
 
     this.form = new FormGroup({
       name: createFormControl(this.stateService.state.name),
-      date: createFormControl(this.stateService.state.date.toLocaleDateString()),
+      date: createFormControl(this.stateService.state.date),
       count: createFormControl(this.stateService.state.count),
       fastDeliver: createFormControl(this.stateService.state.fastDeliver),
+      notes: new FormArray([]),
     });
+
+    this.notes = this.form.get('notes') as FormArray;
   }
 
   onSubmit(): void {
@@ -38,6 +41,14 @@ export class AppComponent implements OnInit {
   setNextValue(): void {
     this.stateService.currentStateIndex++;
     this.updaeControls();
+  }
+
+  addNewNote(): void {
+    this.notes.push(createFormControl(''));
+  }
+
+  removeNote(id: number): void {
+    this.notes.removeAt(id);
   }
 
   private updaeControls(): void {

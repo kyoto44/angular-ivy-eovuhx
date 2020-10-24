@@ -14,22 +14,53 @@
 .form-wrapper {
   border: 1px solid var(--borderColor);
   border-radius: 10px;
-  max-width: 300px;
+  max-width: 400px;
   margin: 0 auto;
   padding: 40px;
 }
 
+button {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
 
-.count, .deliver {
+h3 {
+  margin: 0;
+  margin-bottom: 20px;
+}
+
+.count,
+.deliver,
+.note {
   display: grid;
   grid-template: auto / 1fr 1fr;
   align-items: center;
-
   label {
     justify-self: start;
   }
+}
+
+.deliver {
   input {
     width: 50%;
+  }
+}
+
+.note {
+  grid-template: auto / 1fr 2fr 0.5fr;
+  input {
+    width: 85%;
+  }
+  button {
+    height: 100%;
+    width: 40px;
+    span {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
   }
 }
 
@@ -37,5 +68,24 @@
   input {
     width: 10%;
     margin: 0;
+    height: 100%;
+  }
+}
+
+.addNote {
+  margin: 0 auto;
+  margin-bottom: 20px;
+  display: block;
+}
+
+.btn_blue {
+  svg {
+    margin-left: 5px;
+  }
+}
+
+.btn_warn {
+  svg {
+    margin-right: 5px;
   }
 }

@@ -24,7 +24,6 @@
         type="date"
         placeholder="Выберите дату доставки"
         formControlName="date"
-        [value]="this.stateService.state.date.toLocaleDateString()"
         (change)="stateService.addNewState(form.value)"
       />
     </div>
@@ -45,15 +44,46 @@
         (change)="stateService.addNewState(form.value)"
       />
     </div>
+    <hr />
+    <button type="" class="btn btn_success addNote" (click)="addNewNote()">
+      Добавить примечание <span>&#43;</span>
+    </button>
+    <div
+      class="formControl note"
+      formGroupName="notes"
+      *ngFor="let note of notes.controls; index as i"
+    >
+      <label>Примечание {{ i + 1 }}:</label>
+      <input type="text" placeholder="Примечание" [formControlName]="i" (input)="stateService.addNewState(form.value)"/>
+      <button class="btn btn_danger" (click)="removeNote(i)"><span>&#215;</span></button>
+    </div>
     <div class="btnGroup">
-      <button class="btn btn_warn"
+      <button
+        class="btn btn_warn"
         type="button"
         (click)="setPrevValue()"
         [disabled]="this.stateService.currentStateIndex === 0"
       >
+        <svg
+          width="1em"
+          height="1em"
+          viewBox="0 0 16 16"
+          class="bi bi-arrow-counterclockwise"
+          fill="currentColor"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z"
+          />
+          <path
+            d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z"
+          />
+        </svg>
         Undo
       </button>
-      <button class="btn btn_blue"
+      <button
+        class="btn btn_blue"
         type="button"
         (click)="setNextValue()"
         [disabled]="
@@ -62,8 +92,28 @@
         "
       >
         Redo
+        <svg
+          width="1em"
+          height="1em"
+          viewBox="0 0 16 16"
+          class="bi bi-arrow-clockwise"
+          fill="currentColor"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"
+          />
+          <path
+            d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"
+          />
+        </svg>
       </button>
-      <button class="btn btn_success" type="submit" [disabled]="form.invalid || form.pending">
+      <button
+        class="btn btn_success"
+        type="submit"
+        [disabled]="form.invalid || form.pending"
+      >
         Submit
       </button>
     </div>

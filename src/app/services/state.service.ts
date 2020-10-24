@@ -8,7 +8,7 @@ import { IFormState } from './interfaces';
 export class StateService {
   private _state: IFormState = {
     name: '',
-    date: new Date(),
+    date: new Date().toLocaleDateString().split('.').reverse().join('-'),
     count: 1,
     fastDeliver: false,
     notes: [],
