@@ -12,14 +12,14 @@
     box-shadow 0.15s ease-in-out;
   cursor: pointer;
   &:hover {
-    box-shadow: 0 3px 10px 3px rgba(0 0 0 / 40%);
+    box-shadow: 0 3px 10px 3px var(--shadowHover);
   }
   &:focus {
     outline: 0;
   }
 
   &:disabled {
-    background-color: rgba(0 0 0 / 40%);
+    background-color: var(--shadowHover);
     &:hover {
       box-shadow: none;
     }
