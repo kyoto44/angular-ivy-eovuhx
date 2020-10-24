@@ -33,7 +33,7 @@ export class StateService {
     return this._state;
   }
 
-  addNewState(newState: IFormState): void {
+  updateStateData(newState: IFormState): void {
     if (this._currentStateIndex !== this._state.stateChanges.length - 1) {
       this._state.stateChanges.splice(this._currentStateIndex);
     }

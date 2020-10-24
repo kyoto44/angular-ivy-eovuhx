@@ -16,7 +16,7 @@
         type="text"
         placeholder="Название товара"
         formControlName="name"
-        (input)="stateService.addNewState(form.value)"
+        (input)="updateState()"
       />
     </div>
     <div class="formControl">
@@ -24,7 +24,7 @@
         type="date"
         placeholder="Выберите дату доставки"
         formControlName="date"
-        (change)="stateService.addNewState(form.value)"
+        (change)="updateState()"
       />
     </div>
     <div class="formControl count">
@@ -33,7 +33,7 @@
         type="number"
         placeholder="Количество"
         formControlName="count"
-        (input)="stateService.addNewState(form.value)"
+        (input)="updateState()"
       />
     </div>
     <div class="formControl deliver">
@@ -41,11 +41,11 @@
       <input
         type="checkbox"
         formControlName="fastDeliver"
-        (change)="stateService.addNewState(form.value)"
+        (change)="updateState()"
       />
     </div>
     <hr />
-    <button type="" class="btn btn_success addNote" (click)="addNewNote()">
+    <button type="button" class="btn btn_success addNote" (click)="addNewNote()">
       Добавить примечание <span>&#43;</span>
     </button>
     <div
@@ -58,7 +58,7 @@
         type="text"
         placeholder="Примечание"
         [formControlName]="i"
-        (input)="stateService.addNewState(form.value)"
+        (input)="updateState()"
       />
       <button class="btn btn_danger" (click)="removeNote(i)">
         <span>&#215;</span>

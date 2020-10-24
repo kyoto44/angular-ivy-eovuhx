@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormGroup } from '@angular/forms';
 
 import { StateService } from './services/state.service';
-import { createFormControl } from './utils';
+import { createFormControl, transformData } from './utils';
 
 @Component({
   selector: 'app-root',
@@ -18,7 +18,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.form = new FormGroup({
       name: createFormControl(this.stateService.state.currentSate.name),
-      date: createFormControl(this.stateService.state.currentSate.date.toLocaleDateString().split('.').reverse().join('-')),
+      date: createFormControl(transformData(this.stateService.state.currentSate.date)),
       count: createFormControl(this.stateService.state.currentSate.count),
       fastDeliver: createFormControl(this.stateService.state.currentSate.fastDeliver),
       notes: new FormArray([]),
@@ -29,6 +29,15 @@ export class AppComponent implements OnInit {
 
   onSubmit(): void {
     console.log(this.form.value);
+  }
+
+  updateState(): void {
+    const date = this.form.get('date').value.split('-'),
+      year = +date[0],
+      month = +date[1] - 1,
+      day = +date[2];
+
+    this.stateService.updateStateData({ ...this.form.value, date: new Date(year, month, day) });
   }
 
   setPrevValue(): void {
@@ -54,7 +63,12 @@ export class AppComponent implements OnInit {
   private updaeControls(): void {
     const controls = this.form.controls;
     for (const control in controls) {
-      controls[control].setValue(this.stateService.state.stateChanges[this.stateService.currentStateIndex][control]);
+      const index = this.stateService.currentStateIndex;
+      if (control === 'date') {
+        controls[control].setValue(transformData(this.stateService.state.stateChanges[index][control]));
+      } else {
+        controls[control].setValue(this.stateService.state.stateChanges[index][control]);
+      }
     }
   }
 }

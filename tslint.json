@@ -136,6 +136,7 @@
     },
     "forin": false,
     "no-conflicting-lifecycle": true,
+    "one-variable-per-declaration": false,
     "no-host-metadata-property": true,
     "no-input-rename": true,
     "no-inputs-metadata-property": true,
