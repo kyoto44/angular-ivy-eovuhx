@@ -1,30 +1,25 @@
 import { Injectable } from '@angular/core';
 
-import { IFormState } from './interfaces';
+import { IFormState, IState } from './interfaces';
 
 @Injectable({
   providedIn: 'root',
 })
 export class StateService {
-  private _state: IFormState = {
+  private _initialFormState: IFormState = {
     name: '',
-    date: new Date().toLocaleDateString().split('.').reverse().join('-'),
+    date: new Date(),
     count: 1,
     fastDeliver: false,
     notes: [],
   };
-  private _stateChanges: IFormState[] = [this._state];
+  private _state: IState = {
+    currentSate: this._initialFormState,
+    stateChanges: [this._initialFormState],
+  };
   private _currentStateIndex = 0;
 
   constructor() {}
-
-  get state(): IFormState {
-    return this._state;
-  }
-
-  get stateChanges(): IFormState[] {
-    return this._stateChanges;
-  }
 
   get currentStateIndex(): number {
     return this._currentStateIndex;
@@ -34,9 +29,16 @@ export class StateService {
     this._currentStateIndex = newIndex;
   }
 
+  get state(): IState {
+    return this._state;
+  }
+
   addNewState(newState: IFormState): void {
-    this._stateChanges.push(newState);
-    this._currentStateIndex = this._stateChanges.length - 1;
-    console.log(this._stateChanges, this.currentStateIndex);
+    if (this._currentStateIndex !== this._state.stateChanges.length - 1) {
+      this._state.stateChanges.splice(this._currentStateIndex);
+    }
+    this._state.stateChanges.push(newState);
+    this._currentStateIndex = this._state.stateChanges.length - 1;
+    this._state.currentSate = newState;
   }
 }

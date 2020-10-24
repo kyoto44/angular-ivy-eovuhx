@@ -16,13 +16,11 @@ export class AppComponent implements OnInit {
   constructor(public stateService: StateService) {}
 
   ngOnInit(): void {
-    console.log(this.stateService.state.date);
-
     this.form = new FormGroup({
-      name: createFormControl(this.stateService.state.name),
-      date: createFormControl(this.stateService.state.date),
-      count: createFormControl(this.stateService.state.count),
-      fastDeliver: createFormControl(this.stateService.state.fastDeliver),
+      name: createFormControl(this.stateService.state.currentSate.name),
+      date: createFormControl(this.stateService.state.currentSate.date.toLocaleDateString().split('.').reverse().join('-')),
+      count: createFormControl(this.stateService.state.currentSate.count),
+      fastDeliver: createFormControl(this.stateService.state.currentSate.fastDeliver),
       notes: new FormArray([]),
     });
 
@@ -36,11 +34,13 @@ export class AppComponent implements OnInit {
   setPrevValue(): void {
     this.stateService.currentStateIndex--;
     this.updaeControls();
+    console.log(this.stateService.state);
   }
 
   setNextValue(): void {
     this.stateService.currentStateIndex++;
     this.updaeControls();
+    console.log(this.stateService.state);
   }
 
   addNewNote(): void {
@@ -54,7 +54,7 @@ export class AppComponent implements OnInit {
   private updaeControls(): void {
     const controls = this.form.controls;
     for (const control in controls) {
-      controls[control].setValue(this.stateService.stateChanges[this.stateService.currentStateIndex][control]);
+      controls[control].setValue(this.stateService.state.stateChanges[this.stateService.currentStateIndex][control]);
     }
   }
 }

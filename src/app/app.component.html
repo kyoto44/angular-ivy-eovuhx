@@ -54,8 +54,15 @@
       *ngFor="let note of notes.controls; index as i"
     >
       <label>Примечание {{ i + 1 }}:</label>
-      <input type="text" placeholder="Примечание" [formControlName]="i" (input)="stateService.addNewState(form.value)"/>
-      <button class="btn btn_danger" (click)="removeNote(i)"><span>&#215;</span></button>
+      <input
+        type="text"
+        placeholder="Примечание"
+        [formControlName]="i"
+        (input)="stateService.addNewState(form.value)"
+      />
+      <button class="btn btn_danger" (click)="removeNote(i)">
+        <span>&#215;</span>
+      </button>
     </div>
     <div class="btnGroup">
       <button
@@ -88,7 +95,7 @@
         (click)="setNextValue()"
         [disabled]="
           this.stateService.currentStateIndex ===
-          this.stateService.stateChanges.length - 1
+          this.stateService.state.stateChanges.length - 1
         "
       >
         Redo
