@@ -89,3 +89,38 @@ h3 {
     margin-right: 5px;
   }
 }
+
+
+@media (max-width: 575px) {
+  .form-wrapper {
+    padding: 25px;
+  }
+  .count {
+    grid-template: auto / 1fr 0.98fr;
+    input {
+      width: 85%;
+    }
+  }
+
+  .formControl {
+    input {
+      max-width: 280px;
+    }
+  }
+
+  .note {
+    grid-template: auto / 1fr 1.7fr 0.2fr;
+    row-gap: 5px;
+    button {
+      height: 100%;
+      width: 100%;
+      padding: 0;
+    }
+
+    input {
+      justify-self: center;
+      width: 85%;
+    }
+
+  }
+}

@@ -17,6 +17,7 @@
     padding: 5px 10px;
     font-size: inherit;
     width: 100%;
+    max-width: 400px;
     &.ng-invalid.ng-dirty,
     &.ng-invalid.ng-touched {
       border: 1px solid var(--errorColor);

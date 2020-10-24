@@ -30,7 +30,8 @@ export class AppComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log(this.form.value);
+    alert(`Данные: ${JSON.stringify(this.form.value, null, ' ')} были отправлены на сервер!`);
+    this.form.reset();
   }
 
   updateState(): void {
@@ -56,18 +57,32 @@ export class AppComponent implements OnInit {
 
   addNewNote(): void {
     this.notes.push(createFormControl(''));
+    this.updateState();
   }
 
   removeNote(id: number): void {
     this.notes.removeAt(id);
+    this.updateState();
   }
 
   private updateControls(): void {
     const controls = this.form.controls;
     for (const control in controls) {
       const index = this.stateService.currentStateIndex;
+
       if (control === 'date') {
         controls[control].setValue(transformData(this.stateService.state.stateChanges[index][control]));
+      } else if (control === 'notes') {
+        const notesFromState = this.stateService.state.stateChanges[index].notes,
+          notesFromForm = controls[control].value;
+
+        if (notesFromState.length < notesFromForm.length) {
+          this.notes.removeAt(notesFromForm.length - 1);
+        }
+        if (notesFromState.length > notesFromForm.length) {
+          this.notes.push(createFormControl(''));
+        }
+        controls[control].setValue(this.stateService.state.stateChanges[index][control]);
       } else {
         controls[control].setValue(this.stateService.state.stateChanges[index][control]);
       }
