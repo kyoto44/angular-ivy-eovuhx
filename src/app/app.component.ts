@@ -26,4 +26,21 @@ export class AppComponent implements OnInit {
   onSubmit(): void {
     console.log(this.form.value);
   }
+
+  setPrevValue(): void {
+    this.stateService.currentStateIndex--;
+    this.updaeControls();
+  }
+
+  setNextValue(): void {
+    this.stateService.currentStateIndex++;
+    this.updaeControls();
+  }
+
+  private updaeControls(): void {
+    const controls = this.form.controls;
+    for (const control in controls) {
+      controls[control].setValue(this.stateService.stateChanges[this.stateService.currentStateIndex][control]);
+    }
+  }
 }

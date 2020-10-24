@@ -12,19 +12,54 @@
   <h4>Форма</h4>
   <form class="form-wrapper" [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="formControl">
-      <input type="text" formControlName="name" />
+      <input
+        type="text"
+        placeholder="Название товара"
+        formControlName="name"
+        (input)="stateService.addNewState(form.value)"
+      />
     </div>
     <div class="formControl">
-      <input type="date" formControlName="date" />
+      <input
+        type="date"
+        placeholder="Выберите дату доставки"
+        formControlName="date"
+        (change)="stateService.addNewState(form.value)"
+      />
     </div>
     <div class="formControl">
-      <input type="number" formControlName="count" />
+      <input
+        type="number"
+        placeholder="Количество"
+        formControlName="count"
+        (input)="stateService.addNewState(form.value)"
+      />
     </div>
     <div class="fromControl">
-      <input type="checkbox" formControlName="fastDeliver" />
+      <label>Срочная доставка</label>
+      <input
+        type="checkbox"
+        formControlName="fastDeliver"
+        (change)="stateService.addNewState(form.value)"
+      />
     </div>
-    <button type="button">Undo</button>
-    <button type="button">Redo</button>
+    <button
+      type="button"
+      (click)="setPrevValue()"
+      [disabled]="this.stateService.currentStateIndex === 0"
+    >
+      Undo
+    </button>
+    <button
+      type="button"
+      (click)="setNextValue()"
+      [disabled]="
+        this.stateService.currentStateIndex ===
+        this.stateService.stateChanges.length - 1
+      "
+    >
+      Redo
+    </button>
     <button type="submit">Submit</button>
   </form>
 </div>
