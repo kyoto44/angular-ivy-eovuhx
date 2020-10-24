@@ -30,7 +30,7 @@ export class AppComponent implements OnInit {
   }
 
   onSubmit(): void {
-    alert(`Данные: ${JSON.stringify(this.form.value, null, ' ')} были отправлены на сервер!`);
+    alert(`Данные: ${JSON.stringify(this.stateService.state.currentState, null, ' ')} были отправлены на сервер!`);
     this.form.reset();
   }
 
