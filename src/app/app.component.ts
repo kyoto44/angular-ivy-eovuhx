@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormGroup } from '@angular/forms';
+import { FormArray, FormGroup, Validators } from '@angular/forms';
 
 import { StateService } from './services/state.service';
 import { createFormControl, transformData } from './utils';
@@ -19,7 +19,9 @@ export class AppComponent implements OnInit {
     this.form = new FormGroup({
       name: createFormControl(this.stateService.state.currentSate.name),
       date: createFormControl(transformData(this.stateService.state.currentSate.date)),
-      count: createFormControl(this.stateService.state.currentSate.count),
+      count: createFormControl(this.stateService.state.currentSate.count, [
+        Validators.pattern(/^(?!-|0(?:\.0*)?$)\d+(?:\.\d+)?$/),
+      ]),
       fastDeliver: createFormControl(this.stateService.state.currentSate.fastDeliver),
       notes: new FormArray([]),
     });
