@@ -24,10 +24,12 @@
         type="date"
         placeholder="Выберите дату доставки"
         formControlName="date"
+        [value]="this.stateService.state.date.toLocaleDateString()"
         (change)="stateService.addNewState(form.value)"
       />
     </div>
-    <div class="formControl">
+    <div class="formControl count">
+      <label>Количество товаров:</label>
       <input
         type="number"
         placeholder="Количество"
@@ -35,7 +37,7 @@
         (input)="stateService.addNewState(form.value)"
       />
     </div>
-    <div class="fromControl">
+    <div class="formControl deliver">
       <label>Срочная доставка</label>
       <input
         type="checkbox"
@@ -43,23 +45,27 @@
         (change)="stateService.addNewState(form.value)"
       />
     </div>
-    <button
-      type="button"
-      (click)="setPrevValue()"
-      [disabled]="this.stateService.currentStateIndex === 0"
-    >
-      Undo
-    </button>
-    <button
-      type="button"
-      (click)="setNextValue()"
-      [disabled]="
-        this.stateService.currentStateIndex ===
-        this.stateService.stateChanges.length - 1
-      "
-    >
-      Redo
-    </button>
-    <button type="submit">Submit</button>
+    <div class="btnGroup">
+      <button class="btn btn_warn"
+        type="button"
+        (click)="setPrevValue()"
+        [disabled]="this.stateService.currentStateIndex === 0"
+      >
+        Undo
+      </button>
+      <button class="btn btn_blue"
+        type="button"
+        (click)="setNextValue()"
+        [disabled]="
+          this.stateService.currentStateIndex ===
+          this.stateService.stateChanges.length - 1
+        "
+      >
+        Redo
+      </button>
+      <button class="btn btn_success" type="submit" [disabled]="form.invalid || form.pending">
+        Submit
+      </button>
+    </div>
   </form>
 </div>

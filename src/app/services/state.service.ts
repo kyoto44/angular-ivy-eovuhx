@@ -8,8 +8,8 @@ import { IFormState } from './interfaces';
 export class StateService {
   private _state: IFormState = {
     name: '',
-    date: null,
-    count: null,
+    date: new Date(),
+    count: 1,
     fastDeliver: false,
     notes: [],
   };

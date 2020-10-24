@@ -1,0 +1,28 @@
+.formControl {
+  display: block;
+  margin-top: 0.3rem;
+  margin-bottom: 0.5rem;
+
+  label {
+    display: block;
+    font-size: 15px;
+  }
+
+  input {
+    margin-bottom: 0;
+    transition: 0.3s;
+    outline: none;
+    border-radius: var(--borderRadius);
+    border: 1px solid var(--borderColor);
+    padding: 5px 10px;
+    font-size: inherit;
+    width: 100%;
+    &.ng-invalid.ng-dirty,
+    &.ng-invalid.ng-touched {
+      border: 1px solid var(--errorColor);
+    }
+    &.ng-valid.ng-dirty {
+      border: 1px solid var(--successColor);
+    }
+  }
+}

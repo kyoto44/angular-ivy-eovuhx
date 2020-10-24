@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 
 import { StateService } from './services/state.service';
 import { createFormControl } from './utils';
@@ -15,9 +15,12 @@ export class AppComponent implements OnInit {
   constructor(public stateService: StateService) {}
 
   ngOnInit(): void {
+
+    console.log(this.stateService.state.date.toLocaleDateString());
+
     this.form = new FormGroup({
       name: createFormControl(this.stateService.state.name),
-      date: createFormControl(this.stateService.state.date),
+      date: createFormControl(this.stateService.state.date.toLocaleDateString()),
       count: createFormControl(this.stateService.state.count),
       fastDeliver: createFormControl(this.stateService.state.fastDeliver),
     });
