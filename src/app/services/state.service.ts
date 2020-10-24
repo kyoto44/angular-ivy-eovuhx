@@ -14,7 +14,7 @@ export class StateService {
     notes: [],
   };
   private _state: IState = {
-    currentSate: this._initialFormState,
+    currentState: this._initialFormState,
     stateChanges: [this._initialFormState],
   };
   private _currentStateIndex = 0;
@@ -39,6 +39,6 @@ export class StateService {
     }
     this._state.stateChanges.push(newState);
     this._currentStateIndex = this._state.stateChanges.length - 1;
-    this._state.currentSate = newState;
+    this._state.currentState = newState;
   }
 }

@@ -7,6 +7,6 @@ export interface IFormState {
 }
 
 export interface IState {
-  currentSate: IFormState;
+  currentState: IFormState;
   stateChanges: IFormState[];
 }

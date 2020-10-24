@@ -17,12 +17,12 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = new FormGroup({
-      name: createFormControl(this.stateService.state.currentSate.name),
-      date: createFormControl(transformData(this.stateService.state.currentSate.date)),
-      count: createFormControl(this.stateService.state.currentSate.count, [
+      name: createFormControl(this.stateService.state.currentState.name),
+      date: createFormControl(transformData(this.stateService.state.currentState.date)),
+      count: createFormControl(this.stateService.state.currentState.count, [
         Validators.pattern(/^(?!-|0(?:\.0*)?$)\d+(?:\.\d+)?$/),
       ]),
-      fastDeliver: createFormControl(this.stateService.state.currentSate.fastDeliver),
+      fastDeliver: createFormControl(this.stateService.state.currentState.fastDeliver),
       notes: new FormArray([]),
     });
 
@@ -44,13 +44,13 @@ export class AppComponent implements OnInit {
 
   setPrevValue(): void {
     this.stateService.currentStateIndex--;
-    this.updaeControls();
+    this.updateControls();
     console.log(this.stateService.state);
   }
 
   setNextValue(): void {
     this.stateService.currentStateIndex++;
-    this.updaeControls();
+    this.updateControls();
     console.log(this.stateService.state);
   }
 
@@ -62,7 +62,7 @@ export class AppComponent implements OnInit {
     this.notes.removeAt(id);
   }
 
-  private updaeControls(): void {
+  private updateControls(): void {
     const controls = this.form.controls;
     for (const control in controls) {
       const index = this.stateService.currentStateIndex;
