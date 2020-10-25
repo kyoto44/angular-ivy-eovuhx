@@ -8,6 +8,12 @@
     font-size: 15px;
   }
 
+  .invalid {
+    color: var(--errorColor);
+    font-size: 12px;
+    text-align: left;
+  }
+
   input {
     margin-bottom: 0;
     transition: 0.3s;

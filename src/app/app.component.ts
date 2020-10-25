@@ -3,6 +3,7 @@ import { FormArray, FormGroup, Validators } from '@angular/forms';
 
 import { StateService } from './services/state.service';
 import { createFormControl, transformData } from './utils';
+import { InvalidContent } from './invalid-message/invalid-message.component';
 
 @Component({
   selector: 'app-root',
@@ -63,6 +64,10 @@ export class AppComponent implements OnInit {
   removeNote(id: number): void {
     this.notes.removeAt(id);
     this.updateState();
+  }
+
+  createInvalidContent(...optionalErrors: InvalidContent[]): InvalidContent[] {
+    return [{ error: 'required', message: 'Поле обязательно' }, ...optionalErrors];
   }
 
   private updateControls(): void {

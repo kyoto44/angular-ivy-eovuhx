@@ -18,6 +18,10 @@
         formControlName="name"
         (input)="updateState()"
       />
+      <app-invalid-message
+        [formContol]="form.get('name')"
+        [invalidContent]="createInvalidContent()"
+      ></app-invalid-message>
     </div>
     <div class="formControl">
       <input
@@ -26,6 +30,10 @@
         formControlName="date"
         (change)="updateState()"
       />
+      <app-invalid-message
+        [formContol]="form.get('date')"
+        [invalidContent]="createInvalidContent()"
+      ></app-invalid-message>
     </div>
     <div class="formControl count">
       <label>Количество товаров:</label>
@@ -36,6 +44,16 @@
         formControlName="count"
         (input)="updateState()"
       />
+      <span></span>
+      <app-invalid-message
+        [formContol]="form.get('count')"
+        [invalidContent]="
+          createInvalidContent({
+            error: 'pattern',
+            message: 'Число должно быть больше 0'
+          })
+        "
+      ></app-invalid-message>
     </div>
     <div class="formControl deliver">
       <label>Срочная доставка</label>
@@ -65,9 +83,15 @@
         [formControlName]="i"
         (input)="updateState()"
       />
+
       <button class="btn btn_danger" (click)="removeNote(i)">
         <span>&#215;</span>
       </button>
+      <span></span>
+      <app-invalid-message
+        [formContol]="note"
+        [invalidContent]="createInvalidContent()"
+      ></app-invalid-message>
     </div>
     <div class="btnGroup">
       <button

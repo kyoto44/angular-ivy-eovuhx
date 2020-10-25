@@ -1,0 +1,13 @@
+<div
+  class="invalid"
+  *ngIf="
+    (formContol.invalid && formContol.dirty) ||
+    (formContol.invalid && formContol.touched)
+  "
+>
+  <ng-container *ngFor="let invalidElem of invalidContent">
+    <small *ngIf="formContol.errors[invalidElem.error]">
+      {{ invalidElem.message }}
+    </small>
+  </ng-container>
+</div>
